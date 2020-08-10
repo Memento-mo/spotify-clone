@@ -1,18 +1,46 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <section class="home"></section>
 </template>
+<script lang="ts">
+import Vue from 'vue'
+import { mapActions, mapState } from 'vuex'
+import { fetchToken, tokenExpirationCheck } from '@/service/spotify'
+import * as TYPES from '@/store/types'
 
-<script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+export default Vue.extend({
+  computed: mapState(['myPlaylists', 'myProfile']),
+  methods: {
+    ...mapActions({
+      fetchInit: TYPES.FETCH_INIT
+    })
+  },
+  async mounted() {
+    try {
+      if (window.location.search) {
+        await fetchToken()
+        window.location.search = ''
+      }
 
-export default {
-  name: "Home",
-  components: {
-    HelloWorld
+      await tokenExpirationCheck()
+      this.fetchInit()
+    } catch (error) {
+      this.$router.push('/login')
+    }
   }
-};
+})
 </script>
+
+<style scoped>
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+.router-link {
+  display: block;
+  width: 10%;
+}
+</style>

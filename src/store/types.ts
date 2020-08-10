@@ -1,0 +1,7 @@
+export const START_LOADING = 'START_LOADING'
+export const FINISH_LOADING = 'FINISH_LOADING'
+
+export const FETCH_INIT = 'FETCH_INIT'
+
+export const FETCH_ME_PROFILE = 'FETCH_ME_PROFILE'
+export const FETCH_PLAYLISTS = 'FETCH_PLAYLISTS'
