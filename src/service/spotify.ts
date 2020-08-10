@@ -1,7 +1,6 @@
 import axios from 'axios'
 import querystring from 'querystring'
 import Vue from 'vue'
-
 type Config = {
   clientID: string
   clientSecret: string
@@ -12,7 +11,7 @@ type Config = {
 
 const config: Config = {
   clientID: '9512ca5d72be43c69d5c26e8ca9d145e',
-  clientSecret: 'ce693e279fc9402e8221483962837a08',
+  clientSecret: process.env.VUE_APP_CLIENT_SECRET!,
   url: 'https://accounts.spotify.com/',
   redirectUri: 'http://localhost:8080/',
   scope: [

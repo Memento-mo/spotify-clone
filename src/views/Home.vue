@@ -1,11 +1,16 @@
 <template>
-  <section class="home"></section>
+  <section class="home">
+    <Sidebar />
+    <Main />
+  </section>
 </template>
 <script lang="ts">
 import Vue from 'vue'
 import { mapActions, mapState } from 'vuex'
 import { fetchToken, tokenExpirationCheck } from '@/service/spotify'
 import * as TYPES from '@/store/types'
+import Sidebar from '@/containers/Sidebar'
+import Main from '@/containers/Main'
 
 export default Vue.extend({
   computed: mapState(['myPlaylists', 'myProfile']),
@@ -26,21 +31,18 @@ export default Vue.extend({
     } catch (error) {
       this.$router.push('/login')
     }
+  },
+  components: {
+    Sidebar,
+    Main
   }
 })
 </script>
 
 <style scoped>
 .home {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 70vh;
-}
-
-.router-link {
-  display: block;
-  width: 10%;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  height: 100vh;
 }
 </style>

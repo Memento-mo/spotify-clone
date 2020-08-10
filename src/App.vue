@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <div class="container">
-      <router-view />
-    </div>
+    <router-view />
   </div>
 </template>
 
@@ -26,11 +24,5 @@ a {
   background: #000;
   height: 100vh;
   color: #fff;
-}
-
-.container {
-  max-width: 1366px;
-  padding: 20px;
-  margin: 0 auto;
 }
 </style>
