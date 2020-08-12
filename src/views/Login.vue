@@ -1,5 +1,6 @@
 <template>
   <section class="login">
+    <Back />
     <div class="login_logo">
       <img
         src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png"
@@ -15,6 +16,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Button from '@/components/Button'
+import Back from '@/components/Back'
 import { authUrl } from '@/service/spotify'
 
 export default Vue.extend({
@@ -24,7 +26,8 @@ export default Vue.extend({
     }
   },
   components: {
-    Button
+    Button,
+    Back
   }
 })
 </script>

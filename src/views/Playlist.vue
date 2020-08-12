@@ -3,8 +3,11 @@
     <Sidebar />
     <Loader v-if="isLoading" />
     <Main v-else>
-      <Profile />
-      <Tracks :tracks="user.myTracks" name="Любимые треки" />
+      <HeadPlaylist
+        :img="user.detailsPlaylist.images[0]"
+        :name="user.detailsPlaylist.name"
+      />
+      <Tracks :tracks="user.detailsPlaylist.tracks || []" />
     </Main>
   </section>
 </template>
@@ -13,31 +16,30 @@ import Vue from 'vue'
 import { mapState, mapActions } from 'vuex'
 import * as TYPES from '@/store/types'
 import Sidebar from '@/containers/Sidebar'
-import Main from '@/containers/Main'
-import Profile from '@/components/Profile'
-import Tracks from '@/components/Tracks'
 import Loader from '@/components/Loader'
+import Tracks from '@/components/Tracks'
+import Main from '@/containers/Main'
+import HeadPlaylist from '@/components/HeadPlaylist'
 
 export default Vue.extend({
   computed: mapState(['isLoading', 'user']),
   methods: {
     ...mapActions({
-      homeViews: TYPES.HOME_VIEWS
+      playlistsViews: TYPES.PLAYLIST_VIEWS
     })
-  },
-  mounted() {
-    try {
-      this.homeViews()
-    } catch (error) {
-      console.log(error)
-    }
   },
   components: {
     Sidebar,
-    Main,
-    Profile,
+    Loader,
     Tracks,
-    Loader
+    Main,
+    HeadPlaylist
+  },
+  mounted() {
+    const { id } = (this.$router as any).history.current.params
+    if (id) {
+      this.playlistsViews(id)
+    }
   }
 })
 </script>

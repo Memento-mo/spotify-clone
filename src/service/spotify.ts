@@ -100,6 +100,7 @@ const saveToken = ({
     { token, expires: Date.now() + expires * 1000 },
     Infinity
   )
+  console.log('Токен установлен')
   Vue.$cookies.set('refresh_token', refreshToken, Infinity)
 }
 
@@ -149,6 +150,4 @@ export async function tokenExpirationCheck() {
     console.log('yes', token.expires)
     fetchRefreshToken(refreshToken)
   }
-
-  return
 }
