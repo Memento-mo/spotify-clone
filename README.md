@@ -2,6 +2,7 @@
 <img src="https://i.ibb.co/qRCSvK5/spotify.png"></img>
 <h2 >Mobile version</h2>
 <img src="https://i.ibb.co/FbVF84t/photo-2020-08-13-12-49-111.jpg"></img>
+<img src="https://i.ibb.co/LPP8ZFh/photo-2020-08-13-12-49-11-2-2.jpg"></img>
 
 ## Project setup
 ```
