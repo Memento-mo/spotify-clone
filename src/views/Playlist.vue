@@ -1,13 +1,11 @@
 <template>
   <section class="grid">
-    <Sidebar />
+    <Sidebar class="sidebar" />
+    <Burger class="burger" />
     <Loader v-if="isLoading" />
     <Main v-else>
-      <HeadPlaylist
-        :img="user.detailsPlaylist.images[0]"
-        :name="user.detailsPlaylist.name"
-      />
-      <Tracks :tracks="user.detailsPlaylist.tracks || []" />
+      <HeadPlaylist :detailsPlaylist="user.detailsPlaylist" />
+      <Tracks :tracks="user.detailsPlaylist.tracks" />
     </Main>
   </section>
 </template>
@@ -20,9 +18,15 @@ import Loader from '@/components/Loader'
 import Tracks from '@/components/Tracks'
 import Main from '@/containers/Main'
 import HeadPlaylist from '@/components/HeadPlaylist'
+import Burger from '@/components/Burger'
 
 export default Vue.extend({
   computed: mapState(['isLoading', 'user']),
+  watch: {
+    $route(to) {
+      this.playlistsViews(to.params.id)
+    }
+  },
   methods: {
     ...mapActions({
       playlistsViews: TYPES.PLAYLIST_VIEWS
@@ -33,7 +37,8 @@ export default Vue.extend({
     Loader,
     Tracks,
     Main,
-    HeadPlaylist
+    HeadPlaylist,
+    Burger
   },
   mounted() {
     const { id } = (this.$router as any).history.current.params

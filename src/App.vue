@@ -19,7 +19,7 @@ export default Vue.extend({
     try {
       if (window.location.search) {
         await fetchToken()
-        window.location.search = ''
+        this.$router.push('/')
       }
 
       await tokenExpirationCheck()
@@ -77,5 +77,17 @@ li {
   display: flex;
   height: 100vh;
   overflow: hidden;
+}
+.burger {
+  display: none;
+}
+
+@media screen and (max-width: 992px) {
+  .sidebar {
+    display: none;
+  }
+  .burger {
+    display: block;
+  }
 }
 </style>

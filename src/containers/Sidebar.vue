@@ -1,10 +1,9 @@
 <template>
   <aside class="sidebar">
     <div class="page-home">
-      <div class="house-icon" />
+      <img src="../icons/home.svg" class="house-icon" />
       <router-link to="/">
-        <!-- Главная -->
-        <li @click="homeViews()">Главная</li>
+        <span @click="closeMenu(false)">Главная</span>
       </router-link>
     </div>
     <SidePlaylists />
@@ -14,16 +13,19 @@
 <script lang="ts">
 import Vue from 'vue'
 import SidePlaylists from '@/components/SidePlaylists'
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 import * as TYPES from '@/store/types'
 export default Vue.extend({
-  components: {
-    SidePlaylists
-  },
   methods: {
     ...mapActions({
       homeViews: TYPES.HOME_VIEWS
+    }),
+    ...mapMutations({
+      closeMenu: TYPES.MENU
     })
+  },
+  components: {
+    SidePlaylists
   }
 })
 </script>
@@ -38,8 +40,6 @@ export default Vue.extend({
 .house-icon {
   height: 20px;
   width: 20px;
-  mask-image: url('../icons/home.svg');
-  background: #fff;
 }
 
 .page-home {
@@ -52,5 +52,11 @@ export default Vue.extend({
   font-size: 14px;
   opacity: 0.6;
   font-weight: 600;
+}
+
+@media screen and (max-width: 1200px) {
+  .house-icon {
+    margin-right: 10px;
+  }
 }
 </style>

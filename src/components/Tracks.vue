@@ -14,7 +14,7 @@
 
     <ul
       class="tracks_table tracks-hover"
-      v-for="track in tracks.items"
+      v-for="track in tracksLocal.items"
       :key="track.track.id"
     >
       <li>
@@ -22,7 +22,7 @@
           class="button-track"
           @click="playSong(track.track.uri)"
         >
-          <div class="play" />
+          <img src="../icons/play-svg.svg" class="play" />
         </button>
       </li>
       <li>{{ track.track.name }}</li>
@@ -36,12 +36,15 @@
 import Vue from 'vue'
 import { mapActions } from 'vuex'
 import * as TYPES from '@/store/types'
+import Pagination from '@/components/Pagination'
 
 export default Vue.extend({
-  props: ['name', 'tracks'],
+  props: ['tracks'],
+  computed: {},
   data() {
     return {
-      elemHeight: 0
+      elemHeight: 0,
+      tracksLocal: []
     }
   },
   methods: {
@@ -67,6 +70,12 @@ export default Vue.extend({
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore: Unreachable code error
       this.$parent.$el.firstElementChild.offsetHeight
+    if (this.tracks !== undefined) {
+      this.tracksLocal = this.tracks
+    }
+  },
+  components: {
+    // Pagination Реализивать пагинацию
   }
 })
 </script>
@@ -90,22 +99,21 @@ export default Vue.extend({
 }
 
 .play {
-  height: 20px;
-  width: 20px;
-  mask-image: url('../icons/play-svg.svg');
-  background-color: #fff;
+  height: 15px;
+  width: 17px;
+  /* background: url('../icons/play-svg.svg') no-repeat center; */
   position: relative;
-  top: -2px;
-  left: -2px;
+  top: 1px;
+  left: 1px;
 }
 
 .tracks_table {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 95%;
   font-size: 14px;
-  padding: 10px 15px;
+  padding: 10px 0;
   border-radius: 5px;
   transition: 0.1s ease;
 }
@@ -150,5 +158,77 @@ li {
 
 .active {
   display: block;
+}
+@media screen and (max-width: 1200px) {
+  .tracks_table {
+    font-size: 12px;
+  }
+
+  .play {
+    height: 12px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .tracks_table {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .tracks_table li:nth-child(4),
+  .tracks_table li:nth-child(5) {
+    display: none;
+  }
+
+  .tracks_table li:nth-child(2) {
+    width: 60%;
+  }
+
+  .tracks_table li:nth-child(3) {
+    width: 30%;
+  }
+
+  .tracks_table {
+    font-size: 12px;
+  }
+
+  .play {
+    height: 10px;
+    top: 0;
+  }
+
+  .button-track {
+    padding: 3px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .tracks_table {
+    font-size: 10px;
+  }
+
+  .play {
+    height: 7px;
+    top: -1px;
+  }
+
+  .button-track {
+    border: 1px solid #fff;
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .tracks_table li:first-child {
+    margin-right: 20px;
+  }
+  .tracks_table {
+    font-size: 8px;
+  }
+  .play {
+    height: 5px;
+    top: -2px;
+  }
 }
 </style>

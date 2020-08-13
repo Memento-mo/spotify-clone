@@ -16,11 +16,13 @@ export default new Vuex.Store({
       myTracks: {},
       detailsPlaylist: {}
     },
-    isLoading: true
+    isLoading: true,
+    isOpen: false
   },
   mutations: {
     [TYPES.START_LOADING]: state => (state.isLoading = true),
     [TYPES.FINISH_LOADING]: state => (state.isLoading = false),
+    [TYPES.MENU]: (state, is) => (state.isOpen = is),
     [TYPES.FETCH_PLAYLISTS]: ({ user }, playlists) =>
       (user.myPlaylists = playlists),
     [TYPES.FETCH_PLAYLIST]: ({ user }, playlist) =>

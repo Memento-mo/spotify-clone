@@ -1,9 +1,10 @@
 <template>
   <section class="grid">
-    <Sidebar />
+    <Sidebar class="sidebar" />
+    <Burger class="burger" />
     <Loader v-if="isLoading" />
     <Main v-else>
-      <Profile />
+      <Profile :user="user.myProfile" />
       <Tracks :tracks="user.myTracks" name="Любимые треки" />
     </Main>
   </section>
@@ -17,6 +18,7 @@ import Main from '@/containers/Main'
 import Profile from '@/components/Profile'
 import Tracks from '@/components/Tracks'
 import Loader from '@/components/Loader'
+import Burger from '@/components/Burger'
 
 export default Vue.extend({
   computed: mapState(['isLoading', 'user']),
@@ -37,7 +39,8 @@ export default Vue.extend({
     Main,
     Profile,
     Tracks,
-    Loader
+    Loader,
+    Burger
   }
 })
 </script>

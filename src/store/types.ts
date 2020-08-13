@@ -1,5 +1,6 @@
 export const START_LOADING = 'START_LOADING'
 export const FINISH_LOADING = 'FINISH_LOADING'
+export const MENU = 'MENU'
 
 export const FETCH_INIT = 'FETCH_INIT'
 

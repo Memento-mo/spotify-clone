@@ -7,24 +7,23 @@
       :key="playlist.id"
     >
       <router-link :to="'/playlist/' + playlist.id">
-        <li @click="playlistsViews(playlist.id)">{{ playlist.name }}</li>
+        <li @click="closeMenu(false)">{{ playlist.name }}</li>
       </router-link>
     </ul>
   </section>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import { mapState, mapActions } from 'vuex'
+<script>
+import { mapState, mapMutations } from 'vuex'
 import * as TYPES from '@/store/types'
-export default Vue.extend({
-  computed: mapState(['user']),
+export default {
   methods: {
-    ...mapActions({
-      playlistsViews: TYPES.PLAYLIST_VIEWS
+    ...mapMutations({
+      closeMenu: TYPES.MENU
     })
-  }
-})
+  },
+  computed: mapState(['user'])
+}
 </script>
 
 <style scoped>
