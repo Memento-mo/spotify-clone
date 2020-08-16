@@ -5,7 +5,7 @@
     <Loader v-if="isLoading" />
     <Main v-else>
       <HeadPlaylist :detailsPlaylist="user.detailsPlaylist" />
-      <Tracks :tracks="user.detailsPlaylist.tracks" />
+      <Tracks :tracks="user.tracksFromPlaylist" />
     </Main>
   </section>
 </template>
@@ -24,7 +24,7 @@ export default Vue.extend({
   computed: mapState(['isLoading', 'user']),
   watch: {
     $route(to) {
-      this.playlistsViews(to.params.id)
+      this.playlistsViews({ id: to.params.id })
     }
   },
   methods: {
@@ -43,8 +43,9 @@ export default Vue.extend({
   mounted() {
     const { id } = (this.$router as any).history.current.params
     if (id) {
-      this.playlistsViews(id)
+      this.playlistsViews({ id })
     }
+    console.log(this.user)
   }
 })
 </script>

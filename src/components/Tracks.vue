@@ -30,6 +30,10 @@
       <li>{{ track.track.album.name }}</li>
       <li>{{ msToMinute(track.track.duration_ms) }}</li>
     </ul>
+    <Pagination
+      :next="tracksLocal.next"
+      :previous="tracksLocal.previous"
+    />
   </section>
 </template>
 <script lang="ts">
@@ -53,7 +57,7 @@ export default Vue.extend({
     }),
     playSong(uri: string) {
       this.playSongAction({
-        ['context_uri']: uri
+        uris: [uri]
       })
       console.log('play')
     },
@@ -73,9 +77,10 @@ export default Vue.extend({
     if (this.tracks !== undefined) {
       this.tracksLocal = this.tracks
     }
+    console.log(this.tracks)
   },
   components: {
-    // Pagination Реализивать пагинацию
+    Pagination
   }
 })
 </script>

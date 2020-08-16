@@ -6,15 +6,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { fetchToken, tokenExpirationCheck } from '@/service/spotify'
-import { mapActions } from 'vuex'
-import * as TYPES from '@/store/types'
 
 export default Vue.extend({
-  methods: {
-    ...mapActions({
-      fetchInit: TYPES.FETCH_INIT
-    })
-  },
   async mounted() {
     try {
       if (window.location.search) {

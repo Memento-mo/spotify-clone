@@ -5,7 +5,7 @@
     <Loader v-if="isLoading" />
     <Main v-else>
       <Profile :user="user.myProfile" />
-      <Tracks :tracks="user.myTracks" name="Любимые треки" />
+      <Tracks :tracks="user.myLikedTracks" name="Любимые треки" />
     </Main>
   </section>
 </template>
